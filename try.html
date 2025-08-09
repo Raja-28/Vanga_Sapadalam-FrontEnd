@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Chef Center</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(90deg, #bdb76b, #f0e68c);
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container {
+      background: white;
+      padding: 30px 40px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      width: 300px;
+      text-align: center;
+      position: relative;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 12px 0;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      outline: none;
+      font-size: 16px;
+      transition: border 0.3s;
+    }
+
+    input:focus {
+      border-color: #1f4037;
+    }
+
+    #loginBtn {
+      padding: 12px 25px;
+      background-color: #ff7043;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      position: absolute;
+      transition: transform 0.4s ease, background 0.3s;
+      top: 250px;
+      left: 80px;
+    }
+
+    #loginBtn:hover {
+      background-color: #27ae60;
+    }
+
+    .message {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #e74c3c;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Cook Corridor</h2>
+    <input type="text" id="username" placeholder="Email or Number">
+    <input type="password" id="password" placeholder="Password">
+    <button id="loginBtn">Come ON 😎</button>
+    <div class="message" id="msg"></div>
+  </div>
+
+  <script>
+    const loginBtn = document.getElementById('loginBtn');
+    const username = document.getElementById('username');
+    const password = document.getElementById('password');
+    const msg = document.getElementById('msg');
+
+    function isValidInput() {
+      const userVal = username.value.trim();
+      const passVal = password.value.trim();
+      const emailRegex = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+      const numRegex = /^\d{10}$/;
+      const passRegex = /^[A-Za-z0-9@#\$%]{5,}$/;
+
+      const validUser = emailRegex.test(userVal) || numRegex.test(userVal);
+      const validPass = passRegex.test(passVal);
+
+      return validUser && validPass;
+    }
+
+    loginBtn.addEventListener('mouseover', () => {
+      if (!isValidInput()) {
+        const x = Math.floor(Math.random() * (window.innerWidth - 120));
+        const y = Math.floor(Math.random() * (window.innerHeight - 60));
+        loginBtn.style.transform = `translate(${x}px, ${y}px)`;
+        msg.innerText = "Enter valid Email/Number & Password!";
+      }
+    });
+
+    loginBtn.addEventListener('click', () => {
+      if (isValidInput()) {
+        alert("🎉 Cook Entered in Successful!");
+        msg.innerText = "";
+      } else {
+        msg.innerText = "❌ Invalid credentials. Try again!";
+      }
+    });
+  </script>
+
+</body>
+</html>
